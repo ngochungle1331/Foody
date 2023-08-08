@@ -7,15 +7,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.app.foody.data.network.response.FoodRecipe
 import com.app.foody.databinding.CustomRecipesRowBinding
 import com.app.foody.utils.RecipesDiffUtil
+import com.app.foody.data.network.response.Result
 
 class RecipesAdapter : RecyclerView.Adapter<RecipesAdapter.MyViewHolder>() {
 
-    private var recipes = emptyList<com.app.foody.data.network.response.Result>()
+    private var recipes = emptyList<Result>()
 
     class MyViewHolder(private val binding: CustomRecipesRowBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(result: com.app.foody.data.network.response.Result){
+        fun bind(result: Result){
             binding.result = result
             binding.executePendingBindings()
         }
