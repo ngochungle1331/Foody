@@ -7,7 +7,7 @@ import android.net.NetworkCapabilities
 import androidx.lifecycle.*
 import com.app.foody.data.network.response.FoodRecipe
 import com.app.foody.data.network.response.Recipe
-import com.app.foody.data.source.Repository
+import com.app.foody.data.Repository
 import com.app.foody.utils.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
