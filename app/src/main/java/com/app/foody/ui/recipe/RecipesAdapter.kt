@@ -1,4 +1,4 @@
-package com.app.foody.ui.home
+package com.app.foody.ui.recipe
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

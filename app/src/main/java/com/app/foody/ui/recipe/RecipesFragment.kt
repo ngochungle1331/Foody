@@ -1,4 +1,4 @@
-package com.app.foody.ui.home
+package com.app.foody.ui.recipe
 
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.app.foody.R
 import com.app.foody.databinding.FragmentRecipesBinding
 import com.app.foody.ui.MainViewModel
 import com.app.foody.utils.NetworkResult
@@ -23,10 +26,11 @@ class RecipesFragment : Fragment() {
     private var _dataBinding: FragmentRecipesBinding? = null
     private val dataBinding get() = _dataBinding!!
 
-    //    private late init var binding: FragmentRecipesBinding
     private val adapter by lazy { RecipesAdapter() }
     private lateinit var mainViewModel: MainViewModel
     private lateinit var recipesViewModel: RecipesViewModel
+
+    private val args by navArgs<RecipesFragmentArgs>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,17 +48,19 @@ class RecipesFragment : Fragment() {
         dataBinding.mainViewModel = mainViewModel
 
         setupRecyclerView()
-//        requestApiData()
         readDatabase()
 
-//        return binding.root
+        dataBinding.fabRecipes.setOnClickListener {
+            findNavController().navigate(R.id.action_recipesFragment_to_recipeBottomSheetFragment)
+        }
+
         return dataBinding.root
     }
 
     private fun readDatabase() {
         lifecycleScope.launch {
             mainViewModel.readRecipes.observeOnce(viewLifecycleOwner) { database ->
-                if (database.isNotEmpty()) {
+                if (database.isNotEmpty() && !args.backFromBottomSheet) {
                     Log.d("recipes fragment", "readDatabase called")
                     adapter.setData(database[0].foodRecipe)
                     hideShimmerEffect()
@@ -101,16 +107,16 @@ class RecipesFragment : Fragment() {
     }
 
     private fun showShimmerEffect() {
-        dataBinding.recyclerview.showShimmer()
+        dataBinding.rvRecipes.showShimmer()
     }
 
     private fun hideShimmerEffect() {
-        dataBinding.recyclerview.hideShimmer()
+        dataBinding.rvRecipes.hideShimmer()
     }
 
     private fun setupRecyclerView() {
-        dataBinding.recyclerview.adapter = adapter
-        dataBinding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        dataBinding.rvRecipes.adapter = adapter
+        dataBinding.rvRecipes.layoutManager = LinearLayoutManager(requireContext())
         showShimmerEffect()
     }
 
