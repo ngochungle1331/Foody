@@ -1,4 +1,4 @@
-package com.app.foody.data.source
+package com.app.foody.data
 
 import android.content.Context
 import androidx.datastore.core.DataStore

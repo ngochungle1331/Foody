@@ -1,4 +1,4 @@
-package com.app.foody.data.source
+package com.app.foody.data
 
 import com.app.foody.data.source.local.RecipesLocalDataSource
 import com.app.foody.data.source.remote.RemoteDataSource
