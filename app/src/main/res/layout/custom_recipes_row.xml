@@ -12,8 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/recipesRow"
-        android:layout_width="match_parent"
         onRecipeClickListener="@{result}"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp">
@@ -37,8 +37,8 @@
                 android:background="@color/white">
 
                 <ImageView
-                    loadImageFromUrl="@{result.image}"
                     android:id="@+id/ivRecipe"
+                    loadImageFromUrl="@{result.image}"
                     android:layout_width="200dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -66,12 +66,12 @@
 
                 <TextView
                     android:id="@+id/tvRecipeDescription"
+                    parseHtml="@{result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    parseHtml="@{result.summary}"
                     android:text="@{result.summary}"
                     android:textColor="@color/darkGray"
                     app:layout_constraintEnd_toEndOf="@+id/tvRecipeName"
@@ -88,7 +88,6 @@
                     app:layout_constraintEnd_toEndOf="@+id/tvHeartNumber"
                     app:layout_constraintStart_toStartOf="@+id/tvHeartNumber"
                     app:layout_constraintTop_toBottomOf="@+id/tvRecipeDescription"
-                    app:layout_constraintVertical_bias="0.099"
                     app:srcCompat="@drawable/ic_heart"
                     app:tint="@color/red" />
 
