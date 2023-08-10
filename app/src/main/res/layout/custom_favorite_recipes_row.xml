@@ -6,20 +6,19 @@
     <data>
 
         <variable
-            name="result"
-            type="com.app.foody.data.network.response.Result" />
+            name="favoriteEntity"
+            type="com.app.foody.data.network.response.FavoriteEntity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/recipesRow"
-        onRecipeClickListener="@{result}"
+        android:id="@+id/favoriteRecipesRow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp">
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardViewRow"
+            android:id="@+id/favoriteCardViewRow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:cardCornerRadius="10dp"
@@ -37,10 +36,11 @@
                 android:background="@color/white">
 
                 <ImageView
-                    android:id="@+id/ivRecipe"
-                    loadImageFromUrl="@{result.image}"
+                    android:id="@+id/favoriteIvRecipe"
+                    loadImageFromUrl="@{favoriteEntity.result.image}"
                     android:layout_width="200dp"
                     android:layout_height="0dp"
+                    android:contentDescription="@string/recipe_image"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -48,7 +48,8 @@
                     tools:srcCompat="@tools:sample/avatars" />
 
                 <TextView
-                    android:id="@+id/tvRecipeName"
+                    android:id="@+id/favoriteTvRecipeName"
+                    parseHtml="@{favoriteEntity.result.summary}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
@@ -56,95 +57,97 @@
                     android:layout_marginEnd="12dp"
                     android:ellipsize="end"
                     android:maxLines="2"
-                    android:text="@{result.title}"
                     android:textColor="@color/darker"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/ivRecipe"
+                    app:layout_constraintStart_toEndOf="@+id/favoriteIvRecipe"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvRecipeDescription"
+                    android:id="@+id/favoriteTvRecipeDescription"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    parseHtml="@{result.summary}"
+                    parseHtml="@{favoriteEntity.result.summary}"
                     android:textColor="@color/darkGray"
-                    app:layout_constraintEnd_toEndOf="@+id/tvRecipeName"
-                    app:layout_constraintStart_toStartOf="@+id/tvRecipeName"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRecipeName" />
+                    app:layout_constraintEnd_toEndOf="@+id/favoriteTvRecipeName"
+                    app:layout_constraintStart_toStartOf="@+id/favoriteTvRecipeName"
+                    app:layout_constraintTop_toBottomOf="@+id/favoriteTvRecipeName" />
 
                 <ImageView
-                    android:id="@+id/ivHeart"
+                    android:id="@+id/favoriteIvHeart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="36dp"
+                    android:contentDescription="@string/number_of_likes"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@+id/tvHeartNumber"
-                    app:layout_constraintStart_toStartOf="@+id/tvHeartNumber"
-                    app:layout_constraintTop_toBottomOf="@+id/tvRecipeDescription"
+                    app:layout_constraintEnd_toEndOf="@+id/favoriteTvHeartNumber"
+                    app:layout_constraintStart_toStartOf="@+id/favoriteTvHeartNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/favoriteTvRecipeDescription"
                     app:srcCompat="@drawable/ic_heart"
                     app:tint="@color/red" />
 
                 <TextView
-                    android:id="@+id/tvHeartNumber"
-                    setNumberOfLikes="@{result.aggregateLikes}"
+                    android:id="@+id/favoriteTvHeartNumber"
+                    setNumberOfLikes="@{favoriteEntity.result.aggregateLikes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="100"
+                    android:text="@string/_100"
                     android:textAlignment="center"
                     android:textColor="@color/red"
-                    app:layout_constraintStart_toStartOf="@+id/tvRecipeDescription"
-                    app:layout_constraintTop_toBottomOf="@+id/ivHeart" />
+                    app:layout_constraintStart_toStartOf="@+id/favoriteTvRecipeDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/favoriteIvHeart" />
 
                 <ImageView
-                    android:id="@+id/ivTime"
+                    android:id="@+id/favoriteIvTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@+id/tvTime"
-                    app:layout_constraintStart_toStartOf="@+id/tvTime"
-                    app:layout_constraintTop_toTopOf="@+id/ivHeart"
+                    android:contentDescription="@string/time"
+                    app:layout_constraintEnd_toEndOf="@+id/favoriteTvTime"
+                    app:layout_constraintStart_toStartOf="@+id/favoriteTvTime"
+                    app:layout_constraintTop_toTopOf="@+id/favoriteIvHeart"
                     app:srcCompat="@drawable/ic_time"
                     app:tint="@color/yellow" />
 
                 <TextView
-                    android:id="@+id/tvTime"
-                    setNumberOfMinutes="@{result.readyInMinutes}"
+                    android:id="@+id/favoriteTvTime"
+                    setNumberOfMinutes="@{favoriteEntity.result.readyInMinutes}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="2dp"
-                    android:text="100"
+                    android:text="@string/_100"
                     android:textAlignment="center"
                     android:textColor="@color/yellow"
-                    app:layout_constraintStart_toEndOf="@+id/tvHeartNumber"
-                    app:layout_constraintTop_toBottomOf="@+id/ivTime" />
+                    app:layout_constraintStart_toEndOf="@+id/favoriteTvHeartNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/favoriteIvTime" />
 
                 <ImageView
-                    android:id="@+id/ivIsVegan"
-                    setVeganColor="@{result.vegan}"
+                    android:id="@+id/favoriteIvIsVegan"
+                    setVeganColor="@{favoriteEntity.result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="@+id/tvIsVegan"
-                    app:layout_constraintStart_toStartOf="@+id/tvIsVegan"
-                    app:layout_constraintTop_toTopOf="@+id/ivTime"
+                    android:contentDescription="@string/is_vegan"
+                    app:layout_constraintEnd_toEndOf="@+id/favoriteTvIsVegan"
+                    app:layout_constraintStart_toStartOf="@+id/favoriteTvIsVegan"
+                    app:layout_constraintTop_toTopOf="@+id/favoriteIvTime"
                     app:srcCompat="@drawable/ic_leaf" />
 
                 <TextView
-                    android:id="@+id/tvIsVegan"
-                    setVeganColor="@{result.vegan}"
+                    android:id="@+id/favoriteTvIsVegan"
+                    setVeganColor="@{favoriteEntity.result.vegan}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="1dp"
-                    android:text="Vegan"
+                    android:text="@string/vegan"
                     android:textAlignment="center"
-                    app:layout_constraintStart_toEndOf="@+id/tvTime"
-                    app:layout_constraintTop_toBottomOf="@+id/ivIsVegan" />
+                    app:layout_constraintStart_toEndOf="@+id/favoriteTvTime"
+                    app:layout_constraintTop_toBottomOf="@+id/favoriteIvIsVegan" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
 
