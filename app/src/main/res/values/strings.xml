@@ -38,4 +38,11 @@
     <string name="grams">Grams</string>
     <string name="consistency">Consistency</string>
     <string name="original">Original</string>
+    <string name="save_to_favorite">Save to favorite</string>
+    <string name="no_favorite_recipes">No Favorite Recipes</string>
+    <string name="recipe_image">Recipe Image</string>
+    <string name="number_of_likes">Number of Likes</string>
+    <string name="is_vegan">is vegan</string>
+    <string name="time">Time</string>
+    <string name="delete_favorite_menu">Delete Favorite Menu</string>
 </resources>
